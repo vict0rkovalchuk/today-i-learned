@@ -40,7 +40,7 @@ export default function FactsList() {
   return (
     <section>
       <ul className="facts-list">
-        {facts.map(fact => <FactItem fact={fact}/>)}
+        {facts.map(fact => <FactItem fact={fact} key={fact.id}/>)}
       </ul>
     </section>
   )

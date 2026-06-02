@@ -1,3 +1,6 @@
+import { CATEGORIES } from "../data/categories";
+import CategoryFilterItem from "./CategoryFilterItem";
+
 export default function CategoryFilter() {
   return (
     <aside>
@@ -5,22 +8,13 @@ export default function CategoryFilter() {
         <li className="category">
           <button className="btn btn-all-categories">All</button>
         </li>
-        <li className="category">
-          <button
-            className="btn btn-category"
-            style={{ backgroundColor: '#3b82f6' }}
-          >
-            Technology
-          </button>
-        </li>
-        <li className="category">
-          <button
-            className="btn btn-category"
-            style={{ backgroundColor: '#16a34a' }}
-          >
-            Science
-          </button>
-        </li>
+
+        {CATEGORIES.map(category => (
+          <CategoryFilterItem 
+            category={category} 
+            key={category.name}
+          />
+        ))}
       </ul>
     </aside>
   );
