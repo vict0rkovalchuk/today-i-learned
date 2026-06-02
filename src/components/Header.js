@@ -1,4 +1,4 @@
-export default function Header() {
+export default function Header({ setShowForm }) {
   return (
     <header className="header">
       <div className="logo">
@@ -11,7 +11,12 @@ export default function Header() {
         <h1>Today I Learned</h1>
       </div>
 
-      <button className="btn btn-large btn-open">Share a fact</button>
+      <button 
+        className="btn btn-large btn-open"
+        onClick={() => setShowForm(prevShowForm => !prevShowForm)}
+      >
+        Share a fact
+      </button>
     </header>
   )
 }
