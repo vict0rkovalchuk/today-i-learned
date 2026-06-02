@@ -1,6 +1,6 @@
 export default function Form() {
   return (
-    <form class="fact-form hidden">
+    <form className="fact-form hidden">
       <input type="text" placeholder="Share a fact with the world..." />
       <span>200</span>
       <input type="text" placeholder="Trustworthy source..." />
@@ -10,7 +10,7 @@ export default function Form() {
         <option value="science">Science</option>
         <option value="finance">Finance</option>
       </select>
-      <button class="btn btn-large">Post</button>
+      <button className="btn btn-large">Post</button>
     </form>
   )
 }

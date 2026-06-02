@@ -11,7 +11,7 @@ function App() {
       <Header />
       <NewFactForm />
 
-      <main class="main">
+      <main className="main">
         <CategoryFilter />
         <FactsList />
       </main>
