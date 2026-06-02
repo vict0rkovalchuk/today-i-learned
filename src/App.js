@@ -1,20 +1,21 @@
+import CategoryFilter from './components/CategoryFilter';
+import FactsList from './components/FactsList';
+import NewFactForm from './components/NewFactForm';
+import Header from './components/Header';
+
 import './style.css';
 
 function App() {
   return (
-    <header className="header">
-      <div className="logo">
-        <img
-          src="logo.png"
-          height="68"
-          width="68"
-          alt="Today I Learned Logo"
-        />
-        <h1>Today I Learned</h1>
-      </div>
+    <div className="container">
+      <Header />
+      <NewFactForm />
 
-      <button className="btn btn-large btn-open">Share a fact</button>
-    </header>
+      <main class="main">
+        <CategoryFilter />
+        <FactsList />
+      </main>
+    </div>
   );
 }
 
