@@ -1,4 +1,4 @@
-export default function Header({ setShowForm }) {
+export default function Header({ showForm, setShowForm }) {
   return (
     <header className="header">
       <div className="logo">
@@ -15,7 +15,7 @@ export default function Header({ setShowForm }) {
         className="btn btn-large btn-open"
         onClick={() => setShowForm(prevShowForm => !prevShowForm)}
       >
-        Share a fact
+        {showForm ? 'Close' : 'Share a fact'}
       </button>
     </header>
   )

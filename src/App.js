@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="container">
-      <Header setShowForm={setShowForm}/>
+      <Header showForm={showForm} setShowForm={setShowForm}/>
       {showForm && <NewFactForm />}
 
       <main className="main">
