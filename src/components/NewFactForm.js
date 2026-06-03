@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CATEGORIES } from "../data/categories";
 import { isValidHttpUrl } from "../utils/isValidHttpUrl";
 
-export default function Form() {
+export default function NewFactForm({ setFacts, setShowForm }) {
   const [text, setText] = useState('');
   const [source, setSource] = useState('https://example.com/');
   const [category, setCategory] = useState('');
@@ -25,7 +25,12 @@ export default function Form() {
       createdIn: new Date().toISOString(),
     }
 
-    console.log(newFact);
+    setFacts(prevFacts => [newFact, ...prevFacts]);
+
+    setText('');
+    setCategory('');
+    
+    setShowForm(false);
   }
 
   return (
