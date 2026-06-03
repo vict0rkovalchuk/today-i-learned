@@ -30,7 +30,7 @@ function App() {
       if(!error) {
         setFacts(facts);
       } else {
-        alert('There was problem getting data');  
+        alert('There was problem getting data');
       }
 
       setIsLoading(false);
