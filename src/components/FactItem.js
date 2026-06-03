@@ -4,6 +4,7 @@ import supabase from "../services/supabase";
 
 export default function FactItem({ fact, setFacts }) {
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const { 
     id,
@@ -32,6 +33,23 @@ export default function FactItem({ fact, setFacts }) {
 
     setIsUpdating(false);
   }
+
+  async function handleDeleteFact() {
+    setIsDeleting(true);
+
+    const { error } = await supabase
+      .from('facts')
+      .delete()
+      .eq('id', id)
+
+    if(!error) {
+      setFacts(prevFacts => prevFacts.filter(prevFact => prevFact.id !== id));
+    } else {
+      alert('There was a problem deleting a fact');
+    }
+
+    setIsDeleting(false);
+  }
   
   const categoryColor = CATEGORIES.find(cat => cat.name === category).color;
 
@@ -52,23 +70,30 @@ export default function FactItem({ fact, setFacts }) {
       <div className="vote-buttons">
         <button 
           onClick={() => handleVote('votesInteresting')} 
-          disabled={isUpdating}
+          disabled={isUpdating || isDeleting}
         >
           👍 {votesInteresting}
         </button>
 
         <button 
           onClick={() => handleVote('votesMindblowing')} 
-          disabled={isUpdating}
+          disabled={isUpdating || isDeleting}
         >
           🤯 {votesMindblowing}
         </button>
 
         <button 
           onClick={() => handleVote('votesFalse')} 
-          disabled={isUpdating}
+          disabled={isUpdating || isDeleting}
         >
           ⛔️ {votesFalse}
+        </button>
+
+        <button
+          onClick={handleDeleteFact}
+          disabled={isUpdating || isDeleting}
+        >
+          🗑️
         </button>
       </div>
     </li>
