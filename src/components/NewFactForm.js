@@ -1,15 +1,31 @@
 import { useState } from "react";
 import { CATEGORIES } from "../data/categories";
+import { isValidHttpUrl } from "../utils/isValidHttpUrl";
 
 export default function Form() {
   const [text, setText] = useState('');
-  const [source, setSource] = useState('');
+  const [source, setSource] = useState('https://example.com/');
   const [category, setCategory] = useState('');
   
   const textLength = text.length;
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if(!text || !isValidHttpUrl(source) || !category) return;
+
+    const newFact = {
+      id: crypto.randomUUID(),
+      text,
+      source,
+      category,
+      votesInteresting: 0,
+      votesMindblowing: 0,
+      votesFalse: 0,
+      createdIn: new Date().toISOString(),
+    }
+
+    console.log(newFact);
   }
 
   return (
