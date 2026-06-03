@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { CATEGORIES } from "../data/categories";
+import supabase from "../services/supabase";
 
-export default function FactItem({ fact }) {
+export default function FactItem({ fact, setFacts }) {
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const { 
+    id,
     text, 
     source, 
     category, 
@@ -9,6 +14,24 @@ export default function FactItem({ fact }) {
     votesMindblowing, 
     votesFalse
   } = fact;
+
+  async function handleVote(columnName) {
+    setIsUpdating(true);
+
+    const { data: updatedFact, error } = await supabase
+      .from('facts')
+      .update({ [columnName]: fact[columnName] + 1 })
+      .eq('id', id)
+      .select();
+
+    if(!error) {
+      setFacts(prevFacts => prevFacts.map(prevFact => prevFact.id === id ? updatedFact[0] : prevFact));
+    } else {
+      alert('There was a problem updating a fact');
+    }
+
+    setIsUpdating(false);
+  }
   
   const categoryColor = CATEGORIES.find(cat => cat.name === category).color;
 
@@ -27,9 +50,26 @@ export default function FactItem({ fact }) {
         {category}
       </span>
       <div className="vote-buttons">
-        <button>👍 {votesInteresting}</button>
-        <button>🤯 {votesMindblowing}</button>
-        <button>⛔️ {votesFalse}</button>
+        <button 
+          onClick={() => handleVote('votesInteresting')} 
+          disabled={isUpdating}
+        >
+          👍 {votesInteresting}
+        </button>
+
+        <button 
+          onClick={() => handleVote('votesMindblowing')} 
+          disabled={isUpdating}
+        >
+          🤯 {votesMindblowing}
+        </button>
+
+        <button 
+          onClick={() => handleVote('votesFalse')} 
+          disabled={isUpdating}
+        >
+          ⛔️ {votesFalse}
+        </button>
       </div>
     </li>
   );

@@ -52,7 +52,12 @@ function App() {
       <main className="main">
         <CategoryFilter setCurrentCategory={setCurrentCategory}/>
 
-        {isLoading ? <Loader /> : <FactsList facts={facts} />} 
+        {isLoading ? <Loader /> : (
+          <FactsList 
+            facts={facts} 
+            setFacts={setFacts}
+          />
+        )} 
       </main>
     </div>
   );

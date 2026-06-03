@@ -1,6 +1,6 @@
 import FactItem from "./FactItem";
 
-export default function FactsList({ facts }) {
+export default function FactsList({ facts, setFacts }) {
   if(!facts.length) return (
     <section>
       <p className="message">No facts for this category yet! Create the first one!</p>
@@ -10,7 +10,7 @@ export default function FactsList({ facts }) {
   return (
     <section>
       <ul className="facts-list">
-        {facts.map(fact => <FactItem fact={fact} key={fact.id}/>)}
+        {facts.map(fact => <FactItem fact={fact} key={fact.id} setFacts={setFacts}/>)}
       </ul>
     </section>
   );
